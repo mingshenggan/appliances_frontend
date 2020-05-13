@@ -18,7 +18,7 @@
           S/N
         </label>
         <div class="col-sm-8">
-          <b-form-input v-model="appliance.id" :plaintext='!editable' :readonly='!editable' />
+          <b-form-input v-model="appliance.serialNo" :plaintext='!editable' :readonly='!editable' />
         </div>
       </div>
 
@@ -70,13 +70,19 @@
     props: {
       appliance: { type: Object },
       editable: { type: Boolean, default: false },
+      index: { type: Number }
     },
     created () {
       this.original = Object.assign({}, this.appliance)
+      if (this.appliance.id == null)
+        this.editable = true
     },
     methods: {
       deleteAppliance() {
-        if (confirm("Do you really want to delete this appliance?")) {
+        let shouldDelete = confirm("Do you really want to delete this appliance?")
+        if (shouldDelete && this.appliance.id == null) {
+          this.$emit('applianceDeleted', this.index)
+        } else if (shouldDelete) {
           ApiService
             .deleteAppliance(this.appliance.id)
             .then(() => { this.$emit('applianceDeleted', this.index) })
@@ -85,24 +91,39 @@
       },
       toggleEditable(event) {
         event.preventDefault();
-        if (this.editable) {
-          if (confirm("Do you really want to save your changes?")) {
-            ApiService
-              .updateAppliance(this.appliance)
-              .then(() => {
-                this.original = Object.assign({}, this.appliance)
-                this.editable = false
-              }).catch((error) => {
-                alert(error)
-              })
-          } else {
-            if (confirm("...\nDo you want to discard your changes?")) {
-              this.appliance = this.original
-              this.editable = false
-            }
-          }
-        } else {
+        if (!this.editable) {
           this.editable = true
+        }
+
+        let shouldPersist = confirm("Do you really want to save your changes?")
+
+        if (shouldPersist && this.appliance.id == null) {
+          ApiService
+            .createAppliance(this.appliance)
+            .then((response) => {
+              this.original = Object.assign({}, response.data)
+              this.appliance.id = response.data.id
+              this.editable = false
+            }).catch((error) => {
+              alert(error)
+            })
+        } else if (shouldPersist) {
+          ApiService
+            .updateAppliance(this.appliance)
+            .then(() => {
+              this.original = Object.assign({}, this.appliance)
+              this.editable = false
+            }).catch((error) => {
+              alert(error)
+            })
+        } else {
+          let shouldDiscard = confirm("...\nDo you want to discard your changes?")
+          if (shouldDiscard && this.appliance.id != null) {
+            this.appliance = this.original
+            this.editable = false
+          } else if (shouldDiscard) {
+            this.$emit('applianceDeleted', this.index)
+          }
         }
       },
     }

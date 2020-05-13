@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>Hello World</h1>
+    <div class="d-flex justify-content-between">
+      <h1>Appliances World</h1>
+      <b-button class="h-100 mt-2 bg-primary" @click="addNewAppliance">Add</b-button>
+    </div>
     <div v-if='appliances.length > 0'>
       <ApplianceCard
         @applianceDeleted="removeAppliance"
@@ -44,6 +47,10 @@ export default {
     removeAppliance(index) {
       this.appliances.splice(index, 1)
     },
+    addNewAppliance() {
+      this.appliances.push({})
+      this.$nextTick(() => { window.scrollTo(0, document.body.scrollHeight) })
+    }
   },
 }
 </script>

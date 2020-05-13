@@ -1,13 +1,21 @@
 <template>
   <div>
-    <router-view></router-view>
+    <TheHeader></TheHeader>
+    <b-container class="p-0 pt-3">
+      <router-view></router-view>
+    </b-container>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App',
-}
+  import TheHeader from '@/components/TheHeader'
+
+  export default {
+    name: 'App',
+    components: {
+      TheHeader,
+    }
+  }
 </script>
 
 <style>

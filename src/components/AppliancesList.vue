@@ -1,23 +1,22 @@
 <template>
-  <div>
-    <h1 class='mb-3'>Appliances List</h1>
+  <b-container>
+    <div class="d-flex flex-row justify-content-between">
+      <h1 class='mb-3'>Appliances List</h1>
+      <b-button align-v="center" class="h-100 mt-2" variant="primary">Add</b-button>
+    </div>
     <div v-if='appliances.length > 0'>
-      <b-row
-        v-for='i in Math.ceil(appliances.length / appliances_per_row)'
-        :key='i'>
-        <appliance-card
-          v-for='appliance in appliances.slice((i - 1) * appliances_per_row, i * appliances_per_row)'
-          :item='appliance'
-          :key='appliance.id'
-          :appliance='appliance'
-          class="pb-3 pl-3 pr-0"
-          />
-      </b-row>
+      <appliance-card
+        v-for='appliance in appliances'
+        :item='appliance'
+        :key='appliance.id'
+        :appliance='appliance'
+        class="mb-2"
+        />
     </div>
     <div class='d-flex w-100 h-20 justify-content-center' v-else>
       No appliances found
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>

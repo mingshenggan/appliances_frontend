@@ -3,9 +3,7 @@
 
     <nav-bar></nav-bar>
 
-    <b-container fluid>
-      <appliances-list :appliances="appliances" class="p-3"></appliances-list>
-    </b-container>
+    <appliances-list :appliances="appliances" class="p-3"></appliances-list>
 
   </div>
 </template>

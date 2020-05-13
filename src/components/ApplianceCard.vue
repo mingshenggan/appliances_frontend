@@ -4,8 +4,8 @@
     class="border">
     <b-card-text>
 
-      <div class="float-right">
-        <a href="" class="edit-button">
+      <div class="d-flex justify-content-end pb-2">
+        <a href="#" class="edit-button" :class="{ active: editable }" @click="toggleEditable">
           <b-icon-pencil class="mr-2" />
         </a>
         <button type="button" class="close" aria-label="Close" @click="deleteAppliance">
@@ -66,9 +66,13 @@
 
   export default {
     name: 'ApplianceCard',
+    data () { return { original: null } },
     props: {
       appliance: { type: Object },
       editable: { type: Boolean, default: false },
+    },
+    created () {
+      this.original = Object.assign({}, this.appliance)
     },
     methods: {
       deleteAppliance() {
@@ -77,6 +81,28 @@
             .deleteAppliance(this.appliance.id)
             .then(() => { this.$emit('applianceDeleted', this.index) })
             .catch((error) => { alert(error) })
+        }
+      },
+      toggleEditable(event) {
+        event.preventDefault();
+        if (this.editable) {
+          if (confirm("Do you really want to save your changes?")) {
+            ApiService
+              .updateAppliance(this.appliance)
+              .then(() => {
+                this.original = Object.assign({}, this.appliance)
+                this.editable = false
+              }).catch((error) => {
+                alert(error)
+              })
+          } else {
+            if (confirm("...\nDo you want to discard your changes?")) {
+              this.appliance = this.original
+              this.editable = false
+            }
+          }
+        } else {
+          this.editable = true
         }
       },
     }
@@ -88,8 +114,9 @@
     color: inherit;
     opacity: 0.6;
 
-    &:hover {
+    &:hover, &.active {
       opacity: 1 !important;
+      color: #007bff !important;
     }
   }
 </style>

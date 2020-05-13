@@ -10,5 +10,11 @@ export default {
   },
   deleteAppliance(applianceId) {
     return api.delete(`/${applianceId}`)
-  }
+  },
+  updateAppliance(appliance) {
+    return api.patch(`/${appliance.id}`, appliance)
+  },
+  createAppliance(appliance) {
+    return api.post("/", appliance)
+  },
 }

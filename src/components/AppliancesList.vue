@@ -1,9 +1,10 @@
 <template>
   <b-container>
     <div class="d-flex flex-row justify-content-between">
-      <h1 class='mb-3'>Appliances List</h1>
+      <h1 class='mb-1'>Appliances List</h1>
       <b-button align-v="center" class="h-100 mt-2" variant="primary">Add</b-button>
     </div>
+    <hr>
     <div v-if='appliances.length > 0'>
       <appliance-card
         v-for='appliance in appliances'

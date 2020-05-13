@@ -18,32 +18,7 @@ export default {
   name: 'App',
   data () {
     return {
-      appliances: [
-        {
-          "id": "fa5dae6b-2f34-4e3b-8952-8764c826c1a0",
-          "serialNo": "Hello",
-          "brand": "brand",
-          "model": "model",
-          "status": "status",
-          "purchaseDate": "2020-01-01"
-        },
-        {
-          "id": "4f501f51-a74e-4c5c-9e29-d5c299325d9d",
-          "serialNo": "Hello",
-          "brand": "brand",
-          "model": "model",
-          "status": "status",
-          "purchaseDate": "2020-01-01"
-        },
-        {
-          "id": "273bf8b7-7276-470d-918a-73f4cb13ec8d",
-          "serialNo": "Hello",
-          "brand": "brand",
-          "model": "model",
-          "status": "status",
-          "purchaseDate": "2020-01-01"
-        }
-      ],
+      appliances: [],
     }
   },
   components: {
@@ -62,7 +37,8 @@ export default {
             this.$emit('error_emitted', error)
           })
       }, 200),
-  }
+  },
+  created: function () { this.fetch_appliances() }
 }
 </script>
 

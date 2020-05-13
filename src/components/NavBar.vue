@@ -1,7 +1,7 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="dark">
     <div class="container d-flex justify-content-between">
-      <b-navbar-brand href="#">
+      <b-navbar-brand href="/">
         <img alt="Vue logo" src="../assets/logo.png" height="30">
         <b>
           Appliances Store

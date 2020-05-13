@@ -8,7 +8,7 @@
         <a href="" class="edit-button">
           <b-icon-pencil class="mr-2" />
         </a>
-        <button type="button" class="close" aria-label="Close">
+        <button type="button" class="close" aria-label="Close" @click="deleteAppliance">
           <span aria-hidden="true">×</span>
         </button>
       </div>
@@ -62,11 +62,23 @@
 </template>
 
 <script>
+  import ApiService from "@/services/ApiService"
+
   export default {
     name: 'ApplianceCard',
     props: {
       appliance: { type: Object },
       editable: { type: Boolean, default: false },
+    },
+    methods: {
+      deleteAppliance() {
+        if (confirm("Do you really want to delete this appliance?")) {
+          ApiService
+            .deleteAppliance(this.appliance.id)
+            .then(() => { this.$emit('applianceDeleted', this.index) })
+            .catch((error) => { alert(error) })
+        }
+      },
     }
   }
 </script>

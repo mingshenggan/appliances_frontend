@@ -3,6 +3,7 @@
     <h1>Hello World</h1>
     <div v-if='appliances.length > 0'>
       <ApplianceCard
+        @applianceDeleted="removeAppliance"
         v-for='(appliance, i) in appliances'
         :item='appliance'
         :key='appliance.id'
@@ -40,6 +41,9 @@ export default {
           .then((response) => { this.appliances = response.data })
           .catch((error) => { alert(error) })
       }, 200),
+    removeAppliance(index) {
+      this.appliances.splice(index, 1)
+    },
   },
 }
 </script>

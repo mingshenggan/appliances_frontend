@@ -7,9 +7,11 @@
     <hr>
     <div v-if='appliances.length > 0'>
       <appliance-card
-        v-for='appliance in appliances'
+        @appliance_deleted="removeAppliance"
+        v-for='(appliance, i) in appliances'
         :item='appliance'
         :key='appliance.id'
+        :index='i'
         :appliance='appliance'
         class="mb-2"
         />
@@ -36,6 +38,11 @@
     props: {
       appliances: { type: Array },
     },
+    methods: {
+      removeAppliance: function(index) {
+        this.appliances.splice(index, 1)
+      }
+    }
   }
 </script>
 

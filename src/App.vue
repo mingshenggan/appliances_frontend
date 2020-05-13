@@ -3,7 +3,10 @@
 
     <nav-bar></nav-bar>
 
-    <appliances-list :appliances="appliances" class="p-3"></appliances-list>
+    <appliances-list
+      :appliances="appliances"
+      class="p-3">
+    </appliances-list>
 
   </div>
 </template>
@@ -18,9 +21,11 @@ export default {
   name: 'App',
   data () {
     return {
+      loading: false,
       appliances: [],
     }
   },
+  created () { this.fetch_appliances() },
   components: {
     'nav-bar': NavBar,
     'appliances-list': AppliancesList,
@@ -28,17 +33,19 @@ export default {
   methods: {
     fetch_appliances: _.debounce(
       function () {
+        this.loading = true
         axios
           .get(`https://appliances-spring.herokuapp.com/api/v1/appliances`)
           .then((response) => {
             this.appliances = response.data
+            this.loading = false;
           })
           .catch((error) => {
             this.$emit('error_emitted', error)
+            this.loading = false;
           })
       }, 200),
   },
-  created: function () { this.fetch_appliances() }
 }
 </script>
 

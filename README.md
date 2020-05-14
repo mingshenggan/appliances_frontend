@@ -1,24 +1,22 @@
-# appliances_frontend
+# Appliances Frontend
 
-## Project setup
-```
-yarn install
-```
+## Stack
 
-### Compiles and hot-reloads for development
+Frameworks / languages used
 ```
-yarn serve
-```
+Postgresql
+Java 11
+Vue.js
 
-### Compiles and minifies for production
-```
-yarn build
+Spring Boot Web
+JUnit + Mockito
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+### Deployment
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Backend deployed on [Heroku](https://appliances-spring.herokuapp.com/api/v1/appliances)
+Frontend deployed on [Github Pages](https://mingsheng88.github.io/appliances_frontend/)
+
+## Overview
+
+<img src="https://app.lucidchart.com/publicSegments/view/f83ac389-d018-40f8-a059-e9e38a5bf093/image.png" alt="appliances documentation" />

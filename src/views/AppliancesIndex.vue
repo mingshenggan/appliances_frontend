@@ -57,7 +57,7 @@ export default {
         ApiService.fetchAppliances(this.query)
           .then((response) => { this.appliances = response.data })
           .catch((error) => { alert(error) })
-      }, 100),
+      }, 200),
     removeAppliance(index) {
       this.appliances.splice(index, 1)
     },

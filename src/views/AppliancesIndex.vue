@@ -5,7 +5,7 @@
       <div class="d-flex h-100 mt-2">
         <b-form-input
           v-model='query'
-          @change='search'
+          v-on:keyup='search'
           placeholder="Search appliances"
           />
         <b-button class="ml-2 bg-primary" @click="addNewAppliance">Add</b-button>

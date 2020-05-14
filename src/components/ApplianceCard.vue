@@ -54,7 +54,7 @@
           Date of Purchase
         </label>
         <div class="col-sm-8">
-          <b-form-input v-model="appliance.purchaseDate" :plaintext='!editable' :readonly='!editable' />
+          <b-form-datepicker v-model="appliance.purchaseDate" :plaintext='!editable' :readonly='!editable' />
         </div>
       </div>
     </b-card-text>

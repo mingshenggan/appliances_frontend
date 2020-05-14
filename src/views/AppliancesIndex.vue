@@ -53,13 +53,13 @@ export default {
       function () {
         ApiService.fetchAppliances()
           .then((response) => { this.appliances = response.data })
-          .catch((error) => { alert(error) })
+          .catch((error) => { alert(error.response.data.error) })
       }, 200),
     search: _.debounce(
       function() {
         ApiService.fetchAppliances(this.query)
           .then((response) => { this.appliances = response.data })
-          .catch((error) => { alert(error) })
+          .catch((error) => { alert(error.response.data.error) })
       }, 200),
     removeAppliance(index) {
       this.appliances.splice(index, 1)

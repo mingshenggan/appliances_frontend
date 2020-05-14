@@ -91,7 +91,7 @@
           ApiService
             .deleteAppliance(this.appliance.id)
             .then(() => { this.$emit('applianceDeleted', this.index) })
-            .catch((error) => { alert(error) })
+            .catch((error) => { alert(error.response.data.error) })
         }
       },
       toggleEditable(event) {
@@ -124,7 +124,7 @@
               this.$emit("applianceUpdated", response.data, this.index)
               this.editable = false
             }).catch((error) => {
-              alert(error)
+              alert(error.response.data.error)
             })
         } else {
           ApiService
@@ -135,7 +135,7 @@
               this.$emit("applianceUpdated", response.data, this.index)
               this.editable = false
             }).catch((error) => {
-              alert(error)
+              alert(error.response.data.error)
             })
         }
       },

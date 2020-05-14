@@ -16,6 +16,7 @@
     <div v-if='appliances.length > 0'>
       <ApplianceCard
         @applianceDeleted="removeAppliance"
+        @applianceUpdated="refreshAppliance"
         v-for='(appliance, i) in appliances'
         :item='appliance'
         :key='appliance.id'
@@ -66,7 +67,10 @@ export default {
     addNewAppliance() {
       this.appliances.push({})
       this.$nextTick(() => { window.scrollTo(0, document.body.scrollHeight) })
-    }
+    },
+    refreshAppliance(applianceData, index) {
+      this.$set(this.appliances, index, applianceData)
+    },
   },
 }
 </script>

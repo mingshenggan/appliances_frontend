@@ -121,6 +121,7 @@
             .then((response) => {
               this.original = Object.assign({}, response.data)
               this.appliance = response.data
+              this.$emit("applianceUpdated", response.data, this.index)
               this.editable = false
             }).catch((error) => {
               alert(error)
@@ -131,6 +132,7 @@
             .then((response) => {
               this.original = Object.assign({}, response.data)
               this.appliance = response.data
+              this.$emit("applianceUpdated", response.data, this.index)
               this.editable = false
             }).catch((error) => {
               alert(error)

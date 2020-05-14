@@ -93,6 +93,7 @@
         event.preventDefault();
         if (!this.editable) {
           this.editable = true
+          return
         }
 
         let shouldPersist = confirm("Do you really want to save your changes?")

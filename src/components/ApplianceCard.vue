@@ -69,10 +69,12 @@
 
   export default {
     name: 'ApplianceCard',
-    data () { return { original: null } },
+    data () { return {
+      original: null,
+      editable: false,
+    } },
     props: {
       appliance: { type: Object },
-      editable: { type: Boolean, default: false },
       index: { type: Number }
     },
     created () {
@@ -118,7 +120,7 @@
             .createAppliance(this.appliance)
             .then((response) => {
               this.original = Object.assign({}, response.data)
-              this.appliance.id = response.data.id
+              this.appliance = response.data
               this.editable = false
             }).catch((error) => {
               alert(error)
@@ -126,8 +128,9 @@
         } else {
           ApiService
             .updateAppliance(this.appliance)
-            .then(() => {
-              this.original = Object.assign({}, this.appliance)
+            .then((response) => {
+              this.original = Object.assign({}, response.data)
+              this.appliance = response.data
               this.editable = false
             }).catch((error) => {
               alert(error)

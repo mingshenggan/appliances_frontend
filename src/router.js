@@ -12,7 +12,7 @@ const routes = [
 ]
 
 export default new Router({
-  base: '/',
+  base: '/appliances_frontend/',
   mode: 'history',
   routes: routes.map((route) => ({
     name: route.name,

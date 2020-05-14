@@ -8,8 +8,10 @@
           v-on:keyup='search'
           placeholder="Search appliances"
           />
-        <b-button class="ml-2 bg-primary" @click="addNewAppliance">Add</b-button>
       </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <b-button class="mb-2 bg-primary" @click="addNewAppliance">Add Appliance</b-button>
     </div>
     <div v-if='appliances.length > 0'>
       <ApplianceCard

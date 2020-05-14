@@ -14,46 +14,46 @@
       </div>
 
       <div class="row pb-2">
-        <label for="serialNo" class="col-sm-4 form-label">
+        <label for="serialNo" class="col-4 form-label">
           S/N
         </label>
-        <div class="col-sm-8">
+        <div class="col-8">
           <b-form-input v-model="appliance.serialNo" :plaintext='!editable' :readonly='!editable' />
         </div>
       </div>
 
       <div class="row pb-2">
-        <label for="serialNo" class="col-sm-4 form-label">
+        <label for="serialNo" class="col-4 form-label">
           Brand
         </label>
-        <div class="col-sm-8">
+        <div class="col-8">
           <b-form-input v-model="appliance.brand" :plaintext='!editable' :readonly='!editable' />
         </div>
       </div>
 
       <div class="row pb-2">
-        <label for="serialNo" class="col-sm-4 form-label">
+        <label for="serialNo" class="col-4 form-label">
           Model
         </label>
-        <div class="col-sm-8">
+        <div class="col-8">
           <b-form-input v-model="appliance.model" :plaintext='!editable' :readonly='!editable' />
         </div>
       </div>
 
       <div class="row pb-2">
-        <label for="serialNo" class="col-sm-4 form-label">
+        <label for="serialNo" class="col-4 form-label">
           Status
         </label>
-        <div class="col-sm-8">
+        <div class="col-8">
           <b-form-input v-model="appliance.status" :plaintext='!editable' :readonly='!editable' />
         </div>
       </div>
 
       <div class="row pb-2">
-        <label for="serialNo" class="col-sm-4 form-label">
+        <label for="serialNo" class="col-4 form-label">
           Date of Purchase
         </label>
-        <div class="col-sm-8">
+        <div class="col-8">
           <b-form-datepicker v-model="appliance.purchaseDate" :plaintext='!editable' :readonly='!editable' />
         </div>
       </div>

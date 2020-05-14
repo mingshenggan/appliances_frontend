@@ -58,6 +58,9 @@
         </div>
       </div>
     </b-card-text>
+    <template v-slot:footer v-if="editable">
+      <b-button @click=submitChanges variation="primary" class="float-right">Submit</b-button>
+    </template>
   </b-card>
 </template>
 
@@ -96,9 +99,21 @@
           return
         }
 
+        let shouldDiscard = confirm("...\nDo you want to discard your changes?")
+        if (shouldDiscard && this.appliance.id != null) {
+          this.appliance = this.original
+          this.editable = false
+        } else if (shouldDiscard) {
+          this.$emit('applianceDeleted', this.index)
+        }
+      },
+      submitChanges() {
         let shouldPersist = confirm("Do you really want to save your changes?")
 
-        if (shouldPersist && this.appliance.id == null) {
+        if (!shouldPersist)
+          return
+
+        if (this.appliance.id == null) {
           ApiService
             .createAppliance(this.appliance)
             .then((response) => {
@@ -108,7 +123,7 @@
             }).catch((error) => {
               alert(error)
             })
-        } else if (shouldPersist) {
+        } else {
           ApiService
             .updateAppliance(this.appliance)
             .then(() => {
@@ -117,14 +132,6 @@
             }).catch((error) => {
               alert(error)
             })
-        } else {
-          let shouldDiscard = confirm("...\nDo you want to discard your changes?")
-          if (shouldDiscard && this.appliance.id != null) {
-            this.appliance = this.original
-            this.editable = false
-          } else if (shouldDiscard) {
-            this.$emit('applianceDeleted', this.index)
-          }
         }
       },
     }

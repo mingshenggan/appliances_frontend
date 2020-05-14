@@ -2,7 +2,14 @@
   <div>
     <div class="d-flex justify-content-between">
       <h1>Appliances World</h1>
-      <b-button class="h-100 mt-2 bg-primary" @click="addNewAppliance">Add</b-button>
+      <div class="d-flex h-100 mt-2">
+        <b-form-input
+          v-model='query'
+          @change='search'
+          placeholder="Search appliances"
+          />
+        <b-button class="ml-2 bg-primary" @click="addNewAppliance">Add</b-button>
+      </div>
     </div>
     <div v-if='appliances.length > 0'>
       <ApplianceCard
@@ -31,6 +38,7 @@ export default {
   data () {
     return {
       appliances: [],
+      query: "",
     }
   },
   created () { this.fetch_appliances() },
@@ -44,6 +52,12 @@ export default {
           .then((response) => { this.appliances = response.data })
           .catch((error) => { alert(error) })
       }, 200),
+    search: _.debounce(
+      function() {
+        ApiService.fetchAppliances(this.query)
+          .then((response) => { this.appliances = response.data })
+          .catch((error) => { alert(error) })
+      }, 100),
     removeAppliance(index) {
       this.appliances.splice(index, 1)
     },

@@ -5,8 +5,10 @@ const baseURL = "https://appliances-spring.herokuapp.com/api/v1/appliances"
 const api = axios.create({ baseURL })
 
 export default {
-  fetchAppliances() {
-    return api.get("/")
+  fetchAppliances(query) {
+    let params = {}
+    if (query) { params['query'] = query }
+    return api.get("/", { params })
   },
   deleteAppliance(applianceId) {
     return api.delete(`/${applianceId}`)
